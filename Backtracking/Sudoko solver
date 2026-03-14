@@ -42,3 +42,30 @@ bool solveSudoku(vector<vector<char>>& board) {
 
     return true;
 }
+   -> for input getting using array
+ 
+bool solveSudoku(int board[9][9], int row, int col) {
+  }
+
+int main() {
+
+    int board[9][9];
+
+    for(int i = 0; i < 9; i++)
+        for(int j = 0; j < 9; j++)
+            cin >> board[i][j];
+
+    if(solveSudoku(board, 0, 0)) {
+
+        for(int i = 0; i < 9; i++) {
+            for(int j = 0; j < 9; j++)
+                cout << board[i][j] << " ";
+            cout << endl;
+        }
+    }
+    else {
+        cout << "No solution exists";
+    }
+
+    return 0;
+}
