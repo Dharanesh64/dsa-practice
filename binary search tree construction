@@ -43,3 +43,17 @@ int main()
 
     cout << "Root: " << root->data;
 }
+if it is sorted 
+Node* buildBST(vector<int>& arr, int low, int high)
+{
+    if(low > high) return NULL;
+
+    int mid = (low + high) / 2;
+
+    Node* root = new Node(arr[mid]);
+
+    root->left = buildBST(arr, low, mid - 1);
+    root->right = buildBST(arr, mid + 1, high);
+
+    return root;
+}
