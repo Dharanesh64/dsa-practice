@@ -1,0 +1,73 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+struct TreeNode {
+    int val;
+    TreeNode* left;
+    TreeNode* right;
+
+    TreeNode(int x) {
+        val = x;
+        left = right = NULL;
+    }
+};
+
+// Build tree from level order
+TreeNode* buildTree(vector<string>& arr) {
+    if (arr.size() == 0 || arr[0] == "null") return NULL;
+
+    TreeNode* root = new TreeNode(stoi(arr[0]));
+    queue<TreeNode*> q;
+    q.push(root);
+
+    int i = 1;
+    while (!q.empty() && i < arr.size()) {
+        TreeNode* curr = q.front(); q.pop();
+
+        if (arr[i] != "null") {
+            curr->left = new TreeNode(stoi(arr[i]));
+            q.push(curr->left);
+        }
+        i++;
+
+        if (i < arr.size() && arr[i] != "null") {
+            curr->right = new TreeNode(stoi(arr[i]));
+            q.push(curr->right);
+        }
+        i++;
+    }
+
+    return root;
+}
+
+// DFS to print paths
+void dfs(TreeNode* root, string path) {
+    if (!root) return;
+
+    // add current node to path
+    if (path.empty())
+        path = to_string(root->val);
+    else
+        path += "->" + to_string(root->val);
+
+    // if leaf → print
+    if (!root->left && !root->right) {
+        cout << path << endl;
+        return;
+    }
+
+    dfs(root->left, path);
+    dfs(root->right, path);
+}
+
+int main() {
+    int n;
+    cin >> n;
+
+    vector<string> arr(n);
+    for (int i = 0; i < n; i++) cin >> arr[i];
+
+    TreeNode* root = buildTree(arr);
+
+    dfs(root, "");
+}
