@@ -11,7 +11,7 @@ struct TreeNode {
     }
 };
 
-/// Build tree from level order
+// Build tree from level order
 TreeNode* buildTree(vector<int>& arr) {
     if (arr.size() == 0 || arr[0] == -1001) return NULL;
 
